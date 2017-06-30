@@ -1,0 +1,9 @@
+/node_modules/
+
+/dist/*
+!/dist/.keep
+
+/public/*
+!/public/.keep
+
+stats.json
