@@ -29,7 +29,7 @@ app.get('*', function(request, response) {
   const html = renderToString(<App/>);
 
   const {js} = flushChunks(webpackStats, {
-    before: ['manifest'],
+    before: ['manifest', 'vendor'],
     moduleIds: flushModuleIds(),
   });
 
