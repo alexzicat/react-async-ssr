@@ -1,11 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const context = path.join(__dirname, '..');
+
 module.exports = {
-  context: __dirname,
+  context: context,
   entry: './client',
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(context, 'public'),
     filename: 'js/[name].js',
   },
   module: {
@@ -18,7 +20,6 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.NamedModulesPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: (module) => {

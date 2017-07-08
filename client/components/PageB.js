@@ -1,7 +1,8 @@
 import React from 'react';
+import Page from './Page';
 
 const PageB = () => {
-  return <h1>Page B</h1>;
+  return <Page title='Page B'/>;
 };
 
 export default PageB;

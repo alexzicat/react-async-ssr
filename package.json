@@ -7,8 +7,8 @@
   "scripts": {
     "start": "yarn webpack && node dist/server.js",
     "webpack": "yarn webpack:client && yarn webpack:server",
-    "webpack:client": "webpack --config webpack.client.js --json > stats.json",
-    "webpack:server": "webpack -p --config webpack.server.js"
+    "webpack:client": "webpack -p --config webpack/client.config.js --json > stats.json",
+    "webpack:server": "webpack -p --config webpack/server.config.js"
   },
   "dependencies": {
     "express": "^4.15.3",
@@ -16,6 +16,7 @@
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.1",
     "react-universal-component": "^1.4.1",
+    "styled-components": "^2.1.1",
     "webpack-flush-chunks": "^1.0.10"
   },
   "devDependencies": {
