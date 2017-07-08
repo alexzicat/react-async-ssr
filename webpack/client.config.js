@@ -1,4 +1,5 @@
 const path = require('path');
+const StatsPlugin = require('stats-webpack-plugin');
 const webpack = require('webpack');
 
 const context = path.join(__dirname, '..');
@@ -19,6 +20,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new StatsPlugin('../stats.json'),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
