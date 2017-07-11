@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Link from 'react-router-dom/Link';
 import Route from 'react-router-dom/Route';
 import Switch from 'react-router-dom/Switch';
@@ -24,22 +24,30 @@ const Page404 = universal(() => import(/* webpackChunkName: 'page404' */ './Page
   chunkName: 'page404',
 });
 
-const Navigation = () => {
-  return (
-    <div>
-      <Link to='/pageA'>Page A</Link>
-      <Link to='/pageB'>Page B</Link>
-      <Link to='/pageC'>Page C</Link>
-      <Link to='/'>Page 404</Link>
+class Navigation extends Component {
+  componentWillMount() {
+    [PageA, PageB, PageC, Page404].forEach((Component) => {
+      Component.preload();
+    });
+  }
 
-      <Switch>
-        <Route path='/pageA' component={PageA} exact/>
-        <Route path='/pageB' component={PageB} exact/>
-        <Route path='/pageC' component={PageC} exact/>
-        <Route component={Page404} exact/>
-      </Switch>
-    </div>
-  );
-};
+  render() {
+    return (
+      <div>
+        <Link to='/pageA'>Page A</Link>
+        <Link to='/pageB'>Page B</Link>
+        <Link to='/pageC'>Page C</Link>
+        <Link to='/'>Page 404</Link>
+
+        <Switch>
+          <Route path='/pageA' component={PageA} exact/>
+          <Route path='/pageB' component={PageB} exact/>
+          <Route path='/pageC' component={PageC} exact/>
+          <Route component={Page404} exact/>
+        </Switch>
+      </div>
+    );
+  }
+}
 
 export default Navigation;

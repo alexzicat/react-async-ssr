@@ -2,7 +2,7 @@ import React from 'react';
 import Page from './Page';
 
 const ErrorPage = Page.extend`
-  color: red;
+  color: #ff1b61;
 `;
 
 const Page404 = ({staticContext}) => {

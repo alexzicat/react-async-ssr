@@ -4,6 +4,7 @@ export default (html, css = '', js = '') => {
     <html>
     <head>
       <title>Loadables</title>
+      <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
       ${css}
     </head>
     <body>
