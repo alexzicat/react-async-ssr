@@ -6,31 +6,36 @@ import {renderToString} from 'react-dom/server';
 import StaticRouter from 'react-router-dom/StaticRouter';
 import {flushChunkNames} from 'react-universal-component/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components';
-import flushChunks from 'webpack-flush-chunks'
+import flushChunks from 'webpack-flush-chunks';
 
+import createMiddlewares from './hot-reloading';
 import renderTemplate from './template';
-import Navigation from '../client/components/Navigation';
+import App from '../client/components/App';
 
 const app = express();
 const webpackStats = JSON.parse(fs.readFileSync('./stats.json'));
 
 app.use(express.static('public'));
 
+if (process.env.NODE_ENV !== 'production') {
+  createMiddlewares(app);
+}
+
 app.get('*', function(request, response) {
   const context = {};
   const sheet = new ServerStyleSheet();
 
-  const App = () => {
+  const Tutorial = () => {
     return (
       <StyleSheetManager sheet={sheet.instance}>
         <StaticRouter context={context} location={request.url}>
-          <Navigation/>
+          <App/>
         </StaticRouter>
       </StyleSheetManager>
     );
   };
 
-  const html = renderToString(<App/>);
+  const html = renderToString(<Tutorial/>);
 
   if (context.statusCode === 404) {
     response.status(404);

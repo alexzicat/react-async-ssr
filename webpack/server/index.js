@@ -2,11 +2,13 @@ const NodeExternals = require('webpack-node-externals');
 const path = require('path');
 const webpack = require('webpack');
 
-const context = path.join(__dirname, '..');
+const context = path.join(__dirname, '..', '..');
+const isDev = process.env.NODE_ENV !== 'production';
+const config = isDev ? require('./development.config') : require('./production.config');
 
-module.exports = {
+module.exports = Object.assign(config, {
   target: 'node',
-  context: context,
+  context,
   entry: './server',
   output: {
     path: path.resolve(context, 'dist'),
@@ -21,14 +23,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1,
-    }),
-  ],
   externals: new NodeExternals({
     whitelist: [/^react-universal-component/, /^require-universal-module/, /^webpack-flush-chunks/]
   })
-};
+});

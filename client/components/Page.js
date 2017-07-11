@@ -10,8 +10,8 @@ const Page = ({className, title}) => {
 };
 
 const StyledPage = styled(Page)`
-  color: limegreen;
-  font-size: 20px;
+  color: #3cadc1;
+  font-size: 40px;
   text-align: center;
 `;
 

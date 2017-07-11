@@ -1,27 +1,14 @@
-const path = require('path');
 const StatsPlugin = require('stats-webpack-plugin');
 const webpack = require('webpack');
 
-const context = path.join(__dirname, '..');
-
 module.exports = {
-  context: context,
-  entry: './client',
-  output: {
-    path: path.resolve(context, 'public'),
-    filename: 'js/[name].js',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        use: 'babel-loader',
-      },
-    ],
-  },
+  entry: [
+    'webpack-hot-middleware/client',
+    './client',
+  ],
   plugins: [
-    new StatsPlugin('../stats.json'),
-    new webpack.optimize.ModuleConcatenationPlugin(),
+    new StatsPlugin('../../stats.json'),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: (module) => {

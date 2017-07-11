@@ -26,7 +26,7 @@ const Page404 = universal(() => import(/* webpackChunkName: 'page404' */ './Page
 
 const Navigation = () => {
   return (
-    <main>
+    <div>
       <Link to='/pageA'>Page A</Link>
       <Link to='/pageB'>Page B</Link>
       <Link to='/pageC'>Page C</Link>
@@ -38,7 +38,7 @@ const Navigation = () => {
         <Route path='/pageC' component={PageC} exact/>
         <Route component={Page404} exact/>
       </Switch>
-    </main>
+    </div>
   );
 };
 
